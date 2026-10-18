@@ -1,0 +1,14 @@
+.DS_Store
+.env
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+artifacts/*
+!artifacts/.gitkeep
+.toolchain/
+deploy/certs/*
+!deploy/certs/.gitkeep
+*.jks
+*.keystore
+mobile/android/key.properties

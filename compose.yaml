@@ -1,0 +1,23 @@
+services:
+  api:
+    image: velmabank-api:1.0.0
+    pull_policy: never
+    ports:
+      - "${VELMA_BIND:-0.0.0.0}:8080:8080"
+    volumes:
+      - bank-data:/data
+    restart: unless-stopped
+  tls:
+    image: nginx:1.28-alpine
+    pull_policy: never
+    ports:
+      - "${VELMA_BIND:-0.0.0.0}:8443:8443"
+    volumes:
+      - ./deploy/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./deploy/certs:/etc/nginx/certs:ro
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+volumes:
+  bank-data:
