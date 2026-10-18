@@ -6,6 +6,8 @@ The target server needs Linux, Docker Engine and the Compose v2 plugin **already
 
 ## Prepare while online
 
+**Windows lab PC:** use [Windows prep](WINDOWS_PREP.md), which covers local Docker, remote Linux building without Docker on Windows, and using the supplied prebuilt archive. The commands below are the Linux/macOS Bash path.
+
 From repository root:
 
 ```sh
@@ -15,16 +17,16 @@ From repository root:
 ./scripts/build-android.sh
 ```
 
-Transfer `artifacts/velmabank-offline-amd64.tar.gz` and the APKs in `artifacts/android/` to your test environment. Keep TLS private keys inside your team; they are excluded from Git. `images.tar.gz` contains both images, and SHA256SUMS verifies transferred files. The build requires internet; running the resulting bundle does not. Store the generated bundle for repeatability: rebuilding later may resolve newer base-image/dependency layers.
+Transfer `artifacts/velmabank-offline-amd64.tar.gz` and the APKs in `artifacts/android/` to your test environment. Keep TLS private keys inside your team; they are excluded from Git. `images.tar.gz` (Bash export) or `images.tar` (PowerShell export) contains both images, and SHA256SUMS verifies transferred files. The build requires internet; running the resulting bundle does not. Store the generated bundle for repeatability: rebuilding later may resolve newer base-image/dependency layers.
 
 ## Start with no internet
 
 ```sh
 tar -xzf velmabank-offline-amd64.tar.gz
 cd velmabank-offline-amd64
-./start-offline.sh
+bash start-offline.sh
 # Once the final IP is known (example only):
-./configure-tls.sh 192.168.10.50 --replace
+bash configure-tls.sh 192.168.10.50 --replace
 docker compose restart tls
 docker compose ps
 ```

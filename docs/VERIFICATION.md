@@ -37,3 +37,11 @@ No BlueStacks device or physical Android device was available here. Android inst
 ee207405d71a853017395c5233f183cba3f3328f2de5cddc68d516123b2c85c8  velma-clone.apk
 44a12510e3a70490140a00d61de0b38e79faf7576932b4f483107f1c45af4d63  velma-tampered.apk
 ```
+
+## Windows handoff update
+
+- Added five PowerShell 7 scripts for local backend preparation, remote SSH preparation, optional Android builds, optional Burp certificate export and final ZIP assembly.
+- All five scripts parsed successfully with PowerShell 7.6.7 on macOS.
+- Executed `Prepare-Backend.ps1` from an isolated source copy against Docker: image build/export, in-container certificates, tar packaging and all generated SHA-256 checks passed. This exercised PowerShell logic on macOS, not a Windows desktop.
+- Shell syntax checks and relative Markdown link checks passed; 24 individual scenario reports plus shared BlueStacks setup are present.
+- Windows/BlueStacks execution and a real remote SSH builder were not available here; those paths have not been run on the target systems. No RASP or vulnerability scenarios were executed.

@@ -15,6 +15,10 @@ An Android Flutter banking sandbox with a self-contained Docker backend for RASP
 - Portable amd64/arm64 Docker image export, offline certificate generation, persistent SQLite storage.
 - [24-case RASP PoC guide](docs/RASP_POC_GUIDE.md), including Developer Options allowed / mock GPS blocked and auto-clicker versus blacklisting.
 
+## Windows lab and delivery
+
+Read [Windows prep](docs/WINDOWS_PREP.md) for prerequisites. Docker on Windows is optional: use the supplied archive, build with Docker Desktop, or trigger an online Linux Docker builder over SSH. The final ZIP includes APKs, backend images, source and [24 separate step-by-step reports](docs/RASP_POC_GUIDE.md).
+
 ## Run
 
 See [deployment and BlueStacks instructions](docs/DEPLOYMENT.md). On an online preparation machine:

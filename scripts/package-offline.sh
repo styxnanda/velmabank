@@ -12,10 +12,15 @@ docker save --platform "linux/$ARCH" velmabank-api:1.0.0 nginx:1.28-alpine | gzi
 cp compose.yaml "$OUT/"
 cp deploy/nginx.conf "$OUT/deploy/"
 cp deploy/certs/{ca.crt,server.crt,server.key} "$OUT/deploy/certs/"
-cp docs/*.md "$OUT/docs/"
+cp -R docs/. "$OUT/docs/"
 cp README.md "$OUT/"
 cp scripts/start-offline.sh scripts/configure-tls.sh "$OUT/"
 printf 'linux/%s\n' "$ARCH" > "$OUT/PLATFORM.txt"
-(cd "$OUT" && shasum -a 256 images.tar.gz compose.yaml deploy/nginx.conf deploy/certs/* > SHA256SUMS)
+(cd "$OUT"
+ if command -v sha256sum >/dev/null; then
+   sha256sum images.tar.gz compose.yaml deploy/nginx.conf deploy/certs/* > SHA256SUMS
+ else
+   shasum -a 256 images.tar.gz compose.yaml deploy/nginx.conf deploy/certs/* > SHA256SUMS
+ fi)
 tar -czf "$OUT.tar.gz" -C artifacts "velmabank-offline-$ARCH"
 echo "Ready: $OUT.tar.gz (contains lab TLS private key; keep within your test team)"
